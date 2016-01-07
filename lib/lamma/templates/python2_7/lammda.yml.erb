@@ -1,0 +1,7 @@
+funciton:
+  name: hello
+  role_arn: arn:aws:iam::<%= default_role_arn || 'YOUR_ACCOUNT_ID'%>:role/<%= default_role_name || 'YOUR_ROLE_NAME'%>
+  description: Hello, world.
+  timeout: 3
+  memory_size: 128
+  region: <%= default_region || 'us-east-1' %>

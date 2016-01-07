@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+retried = false
+begin
+  require 'lamma'
+  require 'lamma/cli'
+rescue LoadError
+  $:.unshift File.expand_path(File.join(__dir__, '..', 'lib'))
+  if retried
+    raise
+  else
+    retried = true
+    retry
+  end
+end
+
+Lamma::CLI.start(ARGV)

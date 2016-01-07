@@ -1,0 +1,22 @@
+language: ruby
+sudo: false
+rvm:
+- 2.3.3
+- 2.4.0
+addons:
+  code_climate:
+    repo_token:
+      secure: neUQqKyRYW9z4wBNqOzqMgRlKORVrLeczAd4ghoxdL3n+hez03Pqz3PesB5YU1jakxwPlY/f9DQOJDJOk8mNP84/McT3qeiXeAF+dVxnUmOj8GHdZlOgQi0b0b64zbAjGMI9sFtMwJ/ANx8GGCpOGa4PZDNhGddbDLVXKGJynvEC0iQ+t4nOXhUE+uOmaBeXNzmJ8bWdTwYDUvomNjOfWbZLqwOpHFHPFO2GSQ6s55i+oZcyvo+wPad6SwQf2YrJKX6a2MgZS0VDU2y9+SOVkZgXJA8+DUTqA25s8CEB1r0HadnPMI0f+666VNLn7Ds+pJBBQgEOxHTVA+WhV146tXX14ue5i08uwKjV5Uxg80m2uOt8OggMROpXNw2+oFwBG/oCuarbv/CCiF6V9NwKcD9O90ZJxvuc0OpJiQHPbPPLiegezavTlntY1gpz+Wpw294IbeYsH9cZKO913W3JFeOwYbEaVT/VMOmWkigv0WNQ+tX9xvvzQH536YRMfLz7NO0OM5myhBOrGr7Ui9xpRoq8O3p69ZLW0LDZN3NJUz/wkcz9eA4vqfPGu6d0mMrMPh/ymRKOqnaHNylHWhzf3bc6HGUyson0at7X6FlAAlok3G9Zi8VSMc6M1TYequeR7ByprvMscVIKiQjEmIkdmfLzcAu8u9/MaDrBNDjahoc=
+script:
+- bundle exec rake spec
+cache: bundler
+after_success:
+- bundle exec codeclimate-test-reporter
+deploy:
+  provider: rubygems
+  api_key:
+    secure: aN15UjA+CAG3k9v2AUgnEr4Lyg6ThB9cG2qB7hygU8CZ9ppBuQgGBHC3aSH0gP5jU7YRRli99wuEL5Pq1k97mxc5oOdQtpk5Br6dV7hByksImat6R1CWZPK0tC4VgPbFqTuTNt81ukXTYP8JJ1SJ9Z3gSXy4L62LJlhKpYKPA8ACYLdho/4nnbiMIWHnMUBEKhN2HqaIr/h87dsnJbm1fvVliOZnYFwXt2TeDTOEz+MLreJvTGYKUrV4yXLMsH68Nku07+785RWT39mYlxVg1t8Z41ScB0rAcGrk0UI/2PW6VkL9csKzCEj6PgbnBoZhIyXpNQrngSKkTjVB2Wpy9f0/NwzlfxoxhFjAuwkahXCNf6sGoYpm4iSY2Nz/riKBG/71fwSwrpE+/R7uzWZU/qFFOCpikp9EUQl3a6lhV2EM/z+yYel1Fsu3rZP//aOmQrIAxThndnHn3JGYHko6/lhaipqH8iBKbTMNgb//H9+Iy+cBWGO2KiwsfJN88jan/TeAWO6J1WGXT4PSPD6JmtE1ak4P2/KYNSWHUqsbRRgFAiHBGxOUkctqXh6ZhFep5BNpt9bQRtdRxlubZF+yAMbHS8HArL25zlBka6mHQ2GUFgM3KlKwyQ2UFNv1CzrJ56HtnpO4FvfGp30WFosBiUg5zjtEQ6zsnCvWi8qqCDU=
+  gem: lamma
+  on:
+    tags: true
+    repo: ayemos/lamma
