@@ -1,6 +1,7 @@
-require 'lamma'
+require 'pathname'
 require 'yaml'
 
+require 'lamma'
 require 'lamma/runtime'
 require 'lamma/code'
 require 'lamma/vpc_config'
