@@ -43,19 +43,19 @@ module Lamma
         `git add .`
       end
     end
-  end
 
-  private
+    private
 
-  def default_region
-    'us-east-1'
-  end
+    def default_region
+      'us-east-1'
+    end
 
-  def default_account_id
-    nil
-  end
+    def default_account_id
+      nil
+    end
 
-  def default_role_name
-    nil
+    def default_role_name
+      nil
+    end
   end
 end

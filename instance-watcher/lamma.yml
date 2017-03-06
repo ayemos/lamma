@@ -1,0 +1,7 @@
+funciton:
+  name: hello
+  role_arn: arn:aws:iam::YOUR_ACCOUNT_ID:role/YOUR_ROLE_NAME
+  description: Hello, world.
+  timeout: 3
+  memory_size: 128
+  region: us-east-1
