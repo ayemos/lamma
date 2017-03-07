@@ -15,8 +15,6 @@ module Lamma
     end
 
     def zip_io
-      return @zip_io if @zip_io
-
       if h = cached_build_hash
         bp = File.join(build_path, h, BUILD_FILE_NAME)
         Lamma.logger.info "Using cached build: #{bp}"
@@ -26,37 +24,9 @@ module Lamma
           raise "Source path #{@source_path} doesn't exists"
         end
 
-        # prebuild script
-        if @prebuild
-          Lamma.logger.info 'Running prebuild script...'
-          raise unless system(@prebuild)
-        elsif @function.runtime == Lamma::Runtime::PYTHON_27 \
-          && File.exist?(File.join(@source_path, 'requirements.txt'))
-          raise unless system("pip", "install", "-r", "requirements.txt", "-t", ".")
-          # XXX: verbose?
-        elsif [Lamma::Runtime::EDGE_NODE_43, Lamma::Runtime::NODE_43].include? @function.runtime \
-          && File.exist?(File.join(@source_path, 'package.json'))
-          raise unless system("npm", "install", "--production")
-        end
+        prebuild
 
-        io = Zip::OutputStream.write_buffer do |zio|
-          active_paths.each do |path|
-            next unless File.file?(path)
-            File.open(path) do |source_io|
-              zio.put_next_entry(path)
-              data = source_io.read
-              zio.write(data)
-            end
-          end
-        end
-
-        io.rewind
-        if true # XXX: option save_builds?
-          File.open(File.join(zipfile_path, BUILD_FILE_NAME), 'w').write(io.read)
-          Lamma.logger.info("Saved the build: #{zipfile_path}")
-          io.rewind
-        end
-        @zip_io = io
+        @zip_io = zip_and_save
       end
 
       @zip_io
@@ -69,6 +39,43 @@ module Lamma
     end
 
     private
+
+    def zip_and_save
+      io = Zip::OutputStream.write_buffer do |zio|
+        active_paths.each do |path|
+          next unless File.file?(path)
+          File.open(path) do |source_io|
+            zio.put_next_entry(path)
+            data = source_io.read
+            zio.write(data)
+          end
+        end
+      end
+
+      io.rewind
+
+      if true # XXX: option save_builds?
+        File.open(File.join(zipfile_path, BUILD_FILE_NAME), 'w').write(io.read)
+        Lamma.logger.info("Saved the build: #{zipfile_path}")
+        io.rewind
+      end
+
+      io
+    end
+
+    def prebuild
+      if @prebuild
+        Lamma.logger.info 'Running prebuild script...'
+        raise unless system(@prebuild)
+      elsif @function.runtime == Lamma::Runtime::PYTHON_27 \
+        && File.exist?(File.join(@source_path, 'requirements.txt'))
+        raise unless system("pip", "install", "-r", "requirements.txt", "-t", ".")
+        # XXX: verbose?
+      elsif [Lamma::Runtime::EDGE_NODE_43, Lamma::Runtime::NODE_43].include? @function.runtime \
+        && File.exist?(File.join(@source_path, 'package.json'))
+        raise unless system("npm", "install", "--production")
+      end
+    end
 
     def cached_build_hash
       Dir.glob(File.join(build_path, "*/"))

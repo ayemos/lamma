@@ -8,6 +8,7 @@ require 'lamma/code'
 require 'lamma/vpc_config'
 require 'lamma/dead_letter_config'
 require 'lamma/environment'
+require 'lamma/error'
 
 module Lamma
   class Function
@@ -36,7 +37,7 @@ module Lamma
       @timeout = @conf.fetch('timeout', 3)
       @memory_size = @conf.fetch('memory_size', 128)
       # @dead_letter_config = dead_letter_config(@conf)
-      @region = @conf.fetch('region') { raise ValidationError.new('region must be set.') }
+      @region = @conf.fetch('region') { raise Lamma::ValidationError.new('region must be set.') }
       @kms_key_arn = @conf.fetch('kms_key_arn', nil)
     end
 
@@ -63,7 +64,7 @@ module Lamma
         kms_key_arn: @kms_key_arn
       })
 
-      Lamma.logger.info(resp)
+      Lamma.logger.info("Created new function #{resp.function_arn}")
     end
 
     def update

@@ -3,15 +3,18 @@ require 'yaml'
 require 'lamma'
 require 'lamma/function'
 require 'lamma/alias'
+require 'lamma/shared_helpers'
 
 module Lamma
   class CLI::Rollback
+    include SharedHelpers
+
     attr_reader :options, :thor, :path
 
     def initialize(options, thor)
       @options = options
       @thor = thor
-      @conf_path = options['path'] || Lamma::DEFAULT_CONF_PATH
+      @conf_path = search_conf_path(options['path'] || Lamma::DEFAULT_CONF_PATH)
     end
 
     def run
@@ -49,6 +52,8 @@ module Lamma
       end
 
       a.version = lv
+
+      Lamma.logger.info("Updating alias configuration")
       a.update
     end
 

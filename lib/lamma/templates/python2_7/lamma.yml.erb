@@ -1,7 +1,8 @@
-funciton:
-  name: hello
-  role_arn: arn:aws:iam::<%= default_account_id || 'YOUR_ACCOUNT_ID'%>:role/<%= default_role_name || 'YOUR_ROLE_NAME'%>
+function:
+  name: <%= function_name %>
+  role_arn: <%= role_arn %>
   description: Hello, world.
   timeout: 3
   memory_size: 128
-  region: <%= default_region || 'us-east-1' %>
+  runtime: python2.7
+  region: <%= region_or_raise %>

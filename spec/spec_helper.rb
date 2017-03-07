@@ -14,3 +14,8 @@ module SpecHelper
     Pathname.new(__FILE__).dirname.join('fixtures')
   end
 end
+
+RSpec.configure do |config|
+  config.order = :random
+  config.include(SpecHelper)
+end

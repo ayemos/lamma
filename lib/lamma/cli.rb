@@ -4,6 +4,7 @@ require 'thor'
 module Lamma
   class CLI < Thor
     class_option :verbose, aliases: '-v', type: :boolean
+    class_option :profile, aliases: '-p', type: :string
     map '--version' => :print_version
 
     desc 'list', 'List lambda functions in AWS'
@@ -44,6 +45,7 @@ module Lamma
 
     desc 'init FUNCTION_NAME', 'Initialize local function'
     method_option :runtime, aliases: '-r', type: :string, required: true
+    method_option :role_arn, aliases: %w(--role-arn -R), type: :string
     def init(function_name)
       require 'lamma/cli/init'
       Init.new(options, function_name, self).run

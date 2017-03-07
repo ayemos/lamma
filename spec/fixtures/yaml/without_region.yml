@@ -1,0 +1,14 @@
+
+function:
+  name: hello-function
+  runtime: python27
+  role_arn: arn:role:hello
+  handler: lambda_function.lambda_handler
+  description: Hello, function.
+  timeout: 3
+  memory_size: 128
+  publish: false
+  code:
+    source_path: ./source
+    prebuild: pip install -r ./requirements.txt -t .
+    build_path: ./build
