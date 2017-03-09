@@ -36,10 +36,10 @@ export AWS_SECRET_ACCESS_KEY = [YOUR_AWS_SECRET_ACCESS_KEY]
 ```
 
 # Todo
-- [ ] Support Automatic IAM Role initialization
+- [x] Support Automatic IAM Role initialization
 - [ ] Support dead letter queue configuration
-- [ ] Support environment variables
-- [ ] Support KMS encripted variable configuration
+- [x] Support environment variables
+- [x] Support KMS encripted variable configuration
 - [ ] Support VPC configuration
 - [ ] Prepare init templates
   - [x] python2.7
