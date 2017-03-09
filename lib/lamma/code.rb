@@ -72,7 +72,6 @@ module Lamma
       elsif @function.runtime == Lamma::Runtime::PYTHON_27 \
         && File.exist?(File.join(@source_path, 'requirements.txt'))
         raise unless system("pip", "install", "-r", "requirements.txt", "-t", ".")
-        # XXX: verbose?
       elsif [Lamma::Runtime::EDGE_NODE_43, Lamma::Runtime::NODE_43].include?(@function.runtime) \
         && File.exist?(File.join(@source_path, 'package.json'))
         raise unless system("npm", "install", "--production")
