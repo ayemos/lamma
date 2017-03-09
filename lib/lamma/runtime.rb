@@ -13,20 +13,21 @@ module Lamma
     PYTHON_27 = 40
 
     def initialize(str)
-      @type = case str
-      when /^c[s#](harp)?$/i
-        ::Lamma::Runtime::C_SHARP
-      when /^java([-_\.\s]*8?)?$/i
-        ::Lamma::Runtime::JAVA_8
-      when /^node([-_\.\s]*4(\.?3)?)?$/i
-        ::Lamma::Runtime::NODE_43
-      when /^edge[-_\.\s]*node(\s*4(\.?3)?)?$/i
-        ::Lamma::Runtime::EDGE_NODE_43
-      when /^python([-_\.\s]*2(\.?7)?)?$/i
-        ::Lamma::Runtime::PYTHON_27
-      else
-        raise ArgumentError.new("invalid runtime. #{str}")
-      end
+      @type =
+        case str
+        when /^c[s#](harp)?$/i
+          ::Lamma::Runtime::C_SHARP
+        when /^java([-_\.\s]*8?)?$/i
+          ::Lamma::Runtime::JAVA_8
+        when /^node([-_\.\s]*4(\.?3)?)?$/i
+          ::Lamma::Runtime::NODE_43
+        when /^edge[-_\.\s]*node(\s*4(\.?3)?)?$/i
+          ::Lamma::Runtime::EDGE_NODE_43
+        when /^python([-_\.\s]*2(\.?7)?)?$/i
+          ::Lamma::Runtime::PYTHON_27
+        else
+          raise ArgumentError.new("invalid runtime. #{str}")
+        end
     end
 
     NAME = {
