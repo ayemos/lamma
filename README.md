@@ -4,7 +4,7 @@
 [![Test Coverage](https://codeclimate.com/github/ayemos/lamma/badges/coverage.svg)](https://codeclimate.com/github/ayemos/lamma/coverage)
 [![Issue Count](https://codeclimate.com/github/ayemos/lamma/badges/issue_count.svg)](https://codeclimate.com/github/ayemos/lamma)
 
-It will help [Amazon Lambda](http://aws.amazon.com/lambda/) developer to, 
+It will help [AWS Lambda](http://aws.amazon.com/lambda/) developers to,
 - Create new function,
 - Deploy current code,
 - and to Rollback last deployment.

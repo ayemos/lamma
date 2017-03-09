@@ -152,11 +152,11 @@ module Lamma
     end
 
     def dead_letter_config
-      DeadLetterConfig.new(@conf.fetch('dead_letter_config', {}))
+      @dead_letter_config ||= DeadLetterConfig.new(@conf.fetch('dead_letter_config', {}))
     end
 
     def environment
-      Environment.new(@conf.fetch('environment', {}))
+      @environment ||= Environment.new(@conf.fetch('environment', {}))
     end
 
     def vpc_config
