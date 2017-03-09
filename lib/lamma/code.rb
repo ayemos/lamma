@@ -15,7 +15,8 @@ module Lamma
     end
 
     def zip_io
-      if h = cached_build_hash
+      h = cached_build_hash
+      if h
         bp = File.join(build_path, h, BUILD_FILE_NAME)
         Lamma.logger.info "Using cached build: #{bp}"
         @zip_io = File.open(bp, 'rb')
