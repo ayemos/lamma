@@ -33,7 +33,7 @@ module Lamma
 
       while pn != pn.parent
         cp = File.join(pn, bn)
-        if File.exists?(cp)
+        if File.exist?(cp)
           return cp
         end
 
@@ -46,7 +46,7 @@ module Lamma
     private
 
     def load_inifile(path, profile)
-      if File.exists?(path)
+      if File.exist?(path)
         return IniFile.load(path)[profile]
       else
         {}

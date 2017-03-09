@@ -28,7 +28,7 @@ module Lamma
     end
 
     def create_or_update
-      if remote_exists?
+      if remote_exist?
         update
       else
         create
@@ -39,7 +39,7 @@ module Lamma
       @name.upcase
     end
 
-    def remote_exists?
+    def remote_exist?
       begin
         lambda_client.get_alias({
           function_name: @function.name,

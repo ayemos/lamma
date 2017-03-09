@@ -18,13 +18,13 @@ module Lamma
     end
 
     def run
-      unless File.exists?(@conf_path)
+      unless File.exist?(@conf_path)
         abort("Config file #{@conf_path} is missing.")
       end
 
       f = Lamma::Function.new(@conf_path)
 
-      unless f.remote_exists?
+      unless f.remote_exist?
         abort("Remote function #{f.name} doesn't seem to be exists. You have to create or deploy it first")
       end
 
@@ -34,13 +34,13 @@ module Lamma
 
       a = Lamma::Alias.new(f, options['alias'])
 
-      unless a.remote_exists?
+      unless a.remote_exist?
         abort("Alias #{a.name} doesn't exist. You have to deploy the function first.")
       end
 
       la = Lamma::Alias.new(f, "#{options['alias']}_#{Lamma::LAST_DEPLOY_SUFFIX}")
 
-      unless la.remote_exists?
+      unless la.remote_exist?
         abort("Alias #{la.name} doesn't exist. You have to deploy the function first.")
       end
 

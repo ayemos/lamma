@@ -18,7 +18,7 @@ module Lamma
     end
 
     def run
-      unless File.exists?(@conf_path)
+      unless File.exist?(@conf_path)
         abort("Config file #{@conf_path} is missing.")
       end
 
@@ -37,7 +37,7 @@ module Lamma
     def update_or_create_alias(f, new_version)
       a = Lamma::Alias.new(f, options['alias'], new_version)
 
-      if a.remote_exists? && a.remote_version
+      if a.remote_exist? && a.remote_version
         last_version = a.remote_version
         a.update
       else
@@ -58,7 +58,7 @@ module Lamma
     end
 
     def update_or_create_function(f)
-      if f.remote_exists?
+      if f.remote_exist?
         f.update
       else
         thor.say("Function #{f.name} doesn't seem to be exist on remote.", :yellow)

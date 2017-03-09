@@ -97,7 +97,7 @@ module Lamma
     end
 
     def update_or_create
-      if remote_exists?
+      if remote_exist?
         update
       else
         create
@@ -129,7 +129,7 @@ module Lamma
       resp
     end
 
-    def remote_exists?
+    def remote_exist?
       begin
         lambda_client.get_function_configuration({
           function_name: @name,

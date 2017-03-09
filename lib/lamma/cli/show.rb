@@ -10,7 +10,7 @@ module Lamma
     def run
       f = Lamma::Function.new(@function_name)
 
-      unless f.remote_exists?
+      unless f.remote_exist?
         thor.say("Function #{f.name} doesn't exist in remote.")
       end
 

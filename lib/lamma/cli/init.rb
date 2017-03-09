@@ -53,7 +53,7 @@ module Lamma
         [File.expand_path(path), File.join(target, tar_file)]
       end.to_h
 
-      unless Dir.exists?(target)
+      unless Dir.exist?(target)
         FileUtils.makedirs(target)
       end
 
