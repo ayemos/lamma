@@ -20,3 +20,4 @@ deploy:
   on:
     tags: true
     repo: ayemos/lamma
+    rvm: 2.4.0
