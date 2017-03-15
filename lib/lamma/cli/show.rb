@@ -1,4 +1,4 @@
-module Lamma
+えｋmodule Lamma
   class CLI::Show
     def initialize(options, function_name, thor)
       @options = options

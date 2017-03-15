@@ -47,3 +47,4 @@ export AWS_SECRET_ACCESS_KEY = [YOUR_AWS_SECRET_ACCESS_KEY]
   - [ ] node4.3 edge
   - [ ] C#
   - [ ] Java8
+- [ ] Support permission setting (add another command ?)
