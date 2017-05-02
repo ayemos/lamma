@@ -1,0 +1,8 @@
+function:
+  name: hello
+  role_arn: YOUR_ROLE_ARN
+  description: Hello, world.
+  timeout: 3
+  memory_size: 128
+  runtime: python2.7
+  region: ap-northeast-1

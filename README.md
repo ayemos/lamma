@@ -35,6 +35,9 @@ export AWS_ACCESS_KEY_ID = [YOUR_AWS_ACCESS_KEY_ID]
 export AWS_SECRET_ACCESS_KEY = [YOUR_AWS_SECRET_ACCESS_KEY]
 ```
 
+## Examples
+see `./examples`
+
 # Todo
 - [x] Support Automatic IAM Role initialization
 - [ ] Support dead letter queue configuration
@@ -43,8 +46,10 @@ export AWS_SECRET_ACCESS_KEY = [YOUR_AWS_SECRET_ACCESS_KEY]
 - [ ] Support VPC configuration
 - [ ] Prepare init templates
   - [x] python2.7
+  - [ ] python3
   - [ ] node4.3
   - [ ] node4.3 edge
   - [ ] C#
   - [ ] Java8
 - [ ] Support permission setting (add another command ?)
+- [ ] Support python3 runtime
