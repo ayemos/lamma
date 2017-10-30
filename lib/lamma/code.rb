@@ -69,10 +69,10 @@ module Lamma
       if @prebuild
         Lamma.logger.info 'Running prebuild script...'
         raise unless system(@prebuild)
-      elsif @function.runtime == Lamma::Runtime::PYTHON_27 \
+      elsif [Lamma::Runtime::PYTHON_27, Lamma::Runtime::PYTHON_36].include?(@function.runtime.type) \
         && File.exist?(File.join(@source_path, 'requirements.txt'))
         raise unless system("pip", "install", "-r", "requirements.txt", "-t", ".")
-      elsif [Lamma::Runtime::EDGE_NODE_43, Lamma::Runtime::NODE_43].include?(@function.runtime) \
+      elsif [Lamma::Runtime::EDGE_NODE_43, Lamma::Runtime::NODE_43].include?(@function.runtime.type) \
         && File.exist?(File.join(@source_path, 'package.json'))
         raise unless system("npm", "install", "--production")
       end

@@ -11,6 +11,7 @@ module Lamma
     NODE_43 = 30
     EDGE_NODE_43 = 31
     PYTHON_27 = 40
+    PYTHON_36 = 41
 
     def initialize(str)
       @type =
@@ -25,6 +26,8 @@ module Lamma
           ::Lamma::Runtime::EDGE_NODE_43
         when /^python([-_\.\s]*2(\.?7)?)?$/i
           ::Lamma::Runtime::PYTHON_27
+        when /^python([-_\.\s]*3(\.?6)?)?$/i
+          ::Lamma::Runtime::PYTHON_36
         else
           raise ArgumentError.new("invalid runtime. #{str}")
         end
@@ -35,7 +38,8 @@ module Lamma
       JAVA_8 => 'java8',
       NODE_43 => 'nodejs4.3',
       EDGE_NODE_43 => 'nodejs4.3-edge',
-      PYTHON_27 => 'python2.7'
+      PYTHON_27 => 'python2.7',
+      PYTHON_36 => 'python3.6',
     }
 
     def to_s

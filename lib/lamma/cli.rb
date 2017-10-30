@@ -20,7 +20,7 @@ module Lamma
     end
 
     desc 'deploy', 'Upload local lambda function to AWS and deploy.'
-    method_option :path, aliases: '-p', type: :string
+    method_option :conf_path, aliases: '-c', type: :string
     method_option :alias, aliases: '-a', type: :string
     method_option :message, aliases: '-m', type: :string
     def deploy
@@ -29,7 +29,7 @@ module Lamma
     end
 
     desc 'rollback', 'Rollback last deploy.'
-    method_option :path, aliases: '-p', type: :string
+    method_option :conf_path, aliases: '-c', type: :string
     method_option :alias, aliases: '-a', type: :string
     def rollback
       require 'lamma/cli/rollback'
@@ -37,7 +37,7 @@ module Lamma
     end
 
     desc 'create', 'Create new remote function.'
-    method_option :path, aliases: '-p', type: :string
+    method_option :conf_path, aliases: '-c', type: :string
     def create
       require 'lamma/cli/create'
       Create.new(options, self).run
@@ -46,6 +46,7 @@ module Lamma
     desc 'init FUNCTION_NAME', 'Initialize local function'
     method_option :runtime, aliases: '-r', type: :string, required: true
     method_option :role_arn, aliases: %w(--role-arn -R), type: :string
+    method_option :skip_git, aliases: %w(--skip-git -G), type: :boolean
     def init(function_name)
       require 'lamma/cli/init'
       Init.new(options, function_name, self).run

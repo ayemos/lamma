@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe Lamma::Runtime do
-  context 'python' do
-    let(:runtime) { described_class.new('python') }
+  context 'python2' do
+    let(:runtime) { described_class.new('python2') }
 
     it 'describe runtime with normalized name' do
       expect(runtime.to_s).to eq('python2.7')
@@ -10,6 +10,18 @@ RSpec.describe Lamma::Runtime do
 
     it 'escape dots and dash to underscore with dirname' do
       expect(runtime.to_dirname).to eq('python2_7')
+    end
+  end
+
+  context 'python3' do
+    let(:runtime) { described_class.new('python3') }
+
+    it 'describe runtime with normalized name' do
+      expect(runtime.to_s).to eq('python3.6')
+    end
+
+    it 'escape dots and dash to underscore with dirname' do
+      expect(runtime.to_dirname).to eq('python3_6')
     end
   end
 

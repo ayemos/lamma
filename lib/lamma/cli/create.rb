@@ -5,7 +5,7 @@ module Lamma
     def initialize(options, thor)
       @options = options
       @thor = thor
-      @conf_path = options[:path] || Lamma::DEFAULT_CONF_PATH
+      @conf_path = options[:conf_path] || Lamma::DEFAULT_CONF_PATH
     end
 
     def run

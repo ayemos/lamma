@@ -1,10 +1,10 @@
-えｋmodule Lamma
+module Lamma
   class CLI::Show
     def initialize(options, function_name, thor)
       @options = options
       @thor = thor
       @function_name = function_name
-      @conf_path = options[:path] || Lamma::DEFAULT_CONF_PATH
+      @conf_path = options[:conf_path] || Lamma::DEFAULT_CONF_PATH
     end
 
     def run

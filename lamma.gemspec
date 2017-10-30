@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "lamma"
   spec.version       = Lamma::VERSION
   spec.authors       = ["Yuichiro Someya"]
-  spec.email         = ["ayemos.y@gmail.com"]
+  spec.email         = ["me@ayemos.me"]
 
   spec.summary       = %q{Deploy toolset for Amazon Lambda functions.}
   spec.description   = %q{Deploy toolset for Amazon Lambda functions..}

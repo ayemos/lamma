@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'aws-sdk'
 require 'uri'
 require 'json'
@@ -43,10 +44,12 @@ module Lamma
 
     def run
       if Dir.exist?(target)
-        abort("Directory '#{target}' already exists.")
+        Lamma.logger.fatal "Directory '#{target}' already exists."
+        exit(1)
       end
 
       tpath = File.join(File.dirname(__FILE__), '..', 'templates', runtime.to_dirname)
+      p tpath
       templates = Dir.glob(File.join(tpath, '**/*.erb')).map do |path|
         tar_file = path[tpath.length..path.length - 5] # /foo/bar/templates/RUNTIME/baz/lambda_function.py.erb => /baz/lambda_function.py
 
@@ -54,7 +57,7 @@ module Lamma
       end.to_h
 
       unless Dir.exist?(target)
-        FileUtils.makedirs(target)
+        ::FileUtils.makedirs(target)
       end
 
       role_arn = options['role_arn']
@@ -82,10 +85,12 @@ module Lamma
       end
 
 
-      Lamma.logger.info "Initializing git repo in #{target}"
-      Dir.chdir(target) do
-        `git init`
-        `git add .`
+      unless options['skip_git']
+        p options
+        Lamma.logger.info "Initializing git repo in #{target}"
+        Dir.chdir(target) do
+          `git init`
+        end
       end
     end
 

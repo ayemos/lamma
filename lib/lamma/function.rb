@@ -173,7 +173,7 @@ module Lamma
         'index.handler'
       when Runtime::EDGE_NODE_43
         'index.handler'
-      when Runtime::PYTHON_27
+      when Runtime::PYTHON_27, Runtime::PYTHON_36
         'lambda_function.lambda_handler'
       end
     end
