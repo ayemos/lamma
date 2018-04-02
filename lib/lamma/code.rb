@@ -10,6 +10,8 @@ module Lamma
     def initialize(function, yaml)
       @function = function
       @source_path = yaml.fetch('source_path', '.')
+      raise Exception("Invalid source_path #{@source_path}") if @source_path&.empty?
+
       @prebuild = yaml.fetch('prebuild', nil)
       @build_path = yaml.fetch('build_path', nil)
     end
@@ -47,7 +49,7 @@ module Lamma
         active_paths.each do |path|
           next unless File.file?(path)
           File.open(path) do |source_io|
-            zio.put_next_entry(path)
+            zio.put_next_entry(path[(@source_path.length + 1)..-1])
             data = source_io.read
             zio.write(data)
           end
@@ -71,7 +73,7 @@ module Lamma
         raise unless system(@prebuild)
       elsif [Lamma::Runtime::PYTHON_27, Lamma::Runtime::PYTHON_36].include?(@function.runtime.type) \
         && File.exist?(File.join(@source_path, 'requirements.txt'))
-        raise unless system("pip", "install", "-r", "requirements.txt", "-t", ".")
+        raise unless system("pip", "install", "-r", File.join(@source_path, "requirements.txt"), "-t", @source_path)
       elsif [Lamma::Runtime::EDGE_NODE_43, Lamma::Runtime::NODE_43].include?(@function.runtime.type) \
         && File.exist?(File.join(@source_path, 'package.json'))
         raise unless system("npm", "install", "--production")
